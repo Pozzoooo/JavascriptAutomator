@@ -1,5 +1,6 @@
 package pozzo.apps.javascriptautomator.model;
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
@@ -8,7 +9,7 @@ import com.activeandroid.annotation.Table;
  * @since 21/01/16
  */
 @Table(name = "Entry")
-public class Entry {
+public class Entry extends Model {
 	@Column(name = "name")
 	private String name;
 

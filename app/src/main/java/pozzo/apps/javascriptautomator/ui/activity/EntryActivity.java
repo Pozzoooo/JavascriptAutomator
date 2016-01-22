@@ -7,5 +7,5 @@ import android.support.v7.app.AppCompatActivity;
  *
  * Created by sarge on 21/01/16.
  */
-public class EntryActvity extends AppCompatActivity {
+public class EntryActivity extends AppCompatActivity {
 }

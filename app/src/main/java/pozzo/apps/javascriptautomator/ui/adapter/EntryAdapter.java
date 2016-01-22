@@ -1,7 +1,36 @@
 package pozzo.apps.javascriptautomator.ui.adapter;
 
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
+
 /**
- * Created by sarge on 21/01/16.
+ * To list our entries.
+ *
+ * @author Luiz Gustavo Pozzo
+ * @since 21/01/16.
  */
-public class EntryAdapter {
+public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> {
+
+	@Override
+	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+		return null;
+	}
+
+	@Override
+	public void onBindViewHolder(ViewHolder holder, int position) {
+
+	}
+
+	@Override
+	public int getItemCount() {
+		return 0;
+	}
+
+	public class ViewHolder extends RecyclerView.ViewHolder {
+
+		public ViewHolder(View itemView) {
+			super(itemView);
+		}
+	}
 }
