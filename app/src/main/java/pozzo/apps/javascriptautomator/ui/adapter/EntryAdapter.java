@@ -1,8 +1,15 @@
 package pozzo.apps.javascriptautomator.ui.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import pozzo.apps.javascriptautomator.R;
+import pozzo.apps.javascriptautomator.model.Entry;
 
 /**
  * To list our entries.
@@ -11,26 +18,41 @@ import android.view.ViewGroup;
  * @since 21/01/16.
  */
 public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> {
+	private ArrayList<Entry> entries;
+
+	public EntryAdapter(ArrayList<Entry> entries) {
+		this.entries = entries;
+	}
 
 	@Override
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		return null;
+		View view = LayoutInflater.from(parent.getContext())
+				.inflate(R.layout.adapter_entry, parent, false);
+		return new ViewHolder(view);
 	}
 
 	@Override
 	public void onBindViewHolder(ViewHolder holder, int position) {
+		Entry entry = entries.get(position);
 
+		holder.lAddress.setText(entry.getAddress());
+		holder.lName.setText(entry.getName());
 	}
 
 	@Override
 	public int getItemCount() {
-		return 0;
+		return entries.size();
 	}
 
 	public class ViewHolder extends RecyclerView.ViewHolder {
+		TextView lAddress;
+		TextView lName;
 
 		public ViewHolder(View itemView) {
 			super(itemView);
+
+			lName = (TextView) itemView.findViewById(R.id.lName);
+			lAddress = (TextView) itemView.findViewById(R.id.lAddress);
 		}
 	}
 }
