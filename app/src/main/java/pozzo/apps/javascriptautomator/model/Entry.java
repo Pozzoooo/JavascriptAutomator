@@ -10,7 +10,11 @@ import com.activeandroid.annotation.Table;
  */
 @Table(name = "Entry")
 public class Entry extends Model {
-	@Column(name = "name")
+	public interface Col {
+		String NAME = "name";
+	}
+
+	@Column(name = Col.NAME)
 	private String name;
 
 	@Column(name = "address")

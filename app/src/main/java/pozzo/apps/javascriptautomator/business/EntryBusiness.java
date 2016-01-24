@@ -1,5 +1,9 @@
 package pozzo.apps.javascriptautomator.business;
 
+import com.activeandroid.query.Select;
+
+import java.util.List;
+
 import pozzo.apps.javascriptautomator.model.Entry;
 
 /**
@@ -22,5 +26,12 @@ public class EntryBusiness {
 	 */
 	public Entry get(long id) {
 		return Entry.load(Entry.class, id);
+	}
+
+	/**
+	 * @return All entries saed on database.
+	 */
+	public List<Entry> getAll() {
+		return new Select().from(Entry.class).orderBy(Entry.Col.NAME).execute();
 	}
 }

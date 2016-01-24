@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import pozzo.apps.javascriptautomator.R;
 import pozzo.apps.javascriptautomator.model.Entry;
@@ -18,10 +18,15 @@ import pozzo.apps.javascriptautomator.model.Entry;
  * @since 21/01/16.
  */
 public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> {
-	private ArrayList<Entry> entries;
+	private List<Entry> entries;
 
-	public EntryAdapter(ArrayList<Entry> entries) {
+	public EntryAdapter() {
+		super();
+	}
+
+	public void setEntries(List<Entry> entries) {
 		this.entries = entries;
+		notifyDataSetChanged();
 	}
 
 	@Override

@@ -23,6 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.activity.EntryActivity" />
+        <activity android:name=".ui.activity.RunnerActivity" />
     </application>
 
 </manifest>
