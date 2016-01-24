@@ -15,7 +15,6 @@ import pozzo.apps.javascriptautomator.model.Entry;
  * @since 21/01/16.
  *
  * TODO Done discand interface
- * TODO rotation support
  */
 public class EntryActivity extends AppCompatActivity {
 	public static final String PARAM_ENTRY_ID = "entry";
@@ -35,7 +34,7 @@ public class EntryActivity extends AppCompatActivity {
 		eName = (EditText) findViewById(R.id.eName);
 		eAddress = (EditText) findViewById(R.id.eAddress);
 
-		if(handleParam(getIntent().getExtras()))
+		if(handleParam(savedInstanceState))
 			showEntry(entry);
 	}
 
@@ -69,15 +68,25 @@ public class EntryActivity extends AppCompatActivity {
 		eName.setText(entry.getName());
 	}
 
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		if(entry != null)
+			outState.putLong(PARAM_ENTRY_ID, entry.getId());
+		super.onSaveInstanceState(outState);
+	}
+
 	/**
-	 * @param extras to be taken.
+	 * @param savedInstanceState to be taken.
 	 * @return false if nothing taken.
 	 */
-	private boolean handleParam(Bundle extras) {
-		if(extras == null || !extras.containsKey(PARAM_ENTRY_ID))
+	private boolean handleParam(Bundle savedInstanceState) {
+		if(savedInstanceState == null)
+			savedInstanceState = getIntent().getExtras();;
+
+		if(savedInstanceState == null || !savedInstanceState.containsKey(PARAM_ENTRY_ID))
 			return false;
 
-		long entryId = extras.getLong(PARAM_ENTRY_ID);
+		long entryId = savedInstanceState.getLong(PARAM_ENTRY_ID);
 		entry = new EntryBusiness().get(entryId);
 		return entry != null;
 	}
