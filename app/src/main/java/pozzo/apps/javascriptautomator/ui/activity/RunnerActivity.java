@@ -6,6 +6,7 @@ import android.webkit.WebView;
 
 import pozzo.apps.javascriptautomator.JavascriptRunner;
 import pozzo.apps.javascriptautomator.R;
+import pozzo.apps.javascriptautomator.business.EntryBusiness;
 import pozzo.apps.javascriptautomator.model.Entry;
 
 /**
@@ -47,7 +48,7 @@ public class RunnerActivity extends AppCompatActivity {
 			return false;
 
 		long entryId = extras.getLong(PARAM_ENTRY_ID);
-		entry = Entry.load(Entry.class, entryId);
+		entry = new EntryBusiness().get(entryId);
 		return entry != null;
 	}
 }
