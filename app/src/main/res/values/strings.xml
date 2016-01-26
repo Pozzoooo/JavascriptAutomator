@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">JavascriptAutomator</string>
     <string name="action_settings">Settings</string>
+    <string name="loading">Loading</string>
+    <string name="done">Done</string>
+    <string name="discard">Discard</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="commandsInfo">Commands (one line per command)</string>
 </resources>

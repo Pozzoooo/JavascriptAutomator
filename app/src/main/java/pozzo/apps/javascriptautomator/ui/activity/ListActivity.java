@@ -67,6 +67,9 @@ public class ListActivity extends AppCompatActivity {
 
 			@Override
 			protected void onPostExecute(List<Entry> entries) {
+				if(isFinishing())
+					return;
+
 				if(rvList == null)
 					rvList = (RecyclerView) findViewById(R.id.rvList);
 				if(adapter == null)

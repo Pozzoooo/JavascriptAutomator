@@ -1,7 +1,11 @@
 package pozzo.apps.javascriptautomator.ui.activity;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import pozzo.apps.javascriptautomator.R;
@@ -22,6 +26,7 @@ public class EntryActivity extends AppCompatActivity {
 	private EditText eCommands;
 	private EditText eName;
 	private EditText eAddress;
+	private Button bDone;
 
 	private Entry entry;
 
@@ -33,6 +38,9 @@ public class EntryActivity extends AppCompatActivity {
 		eCommands = (EditText) findViewById(R.id.eCommands);
 		eName = (EditText) findViewById(R.id.eName);
 		eAddress = (EditText) findViewById(R.id.eAddress);
+		bDone = (Button) findViewById(R.id.bDone);
+
+		bDone.setOnClickListener(save);
 
 		if(handleParam(savedInstanceState))
 			showEntry(entry);
@@ -42,9 +50,29 @@ public class EntryActivity extends AppCompatActivity {
 	 * Saves the entry to our local storage.
 	 */
 	private void saveEntry() {
-		//TODO async
-		Entry entry = updateEntry();
-		new EntryBusiness().save(entry);
+		new AsyncTask<Void, Void, Void>() {
+			Entry entry;
+			ProgressDialog progressDialog;
+
+			@Override
+			protected void onPreExecute() {
+				progressDialog = ProgressDialog.show(
+						EntryActivity.this, "", getString(R.string.loading));
+				entry = updateEntry();
+			}
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				new EntryBusiness().save(entry);
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void aVoid) {
+				progressDialog.dismiss();
+				finish();
+			}
+		}.execute();
 	}
 
 	/**
@@ -81,7 +109,7 @@ public class EntryActivity extends AppCompatActivity {
 	 */
 	private boolean handleParam(Bundle savedInstanceState) {
 		if(savedInstanceState == null)
-			savedInstanceState = getIntent().getExtras();;
+			savedInstanceState = getIntent().getExtras();
 
 		if(savedInstanceState == null || !savedInstanceState.containsKey(PARAM_ENTRY_ID))
 			return false;
@@ -90,4 +118,19 @@ public class EntryActivity extends AppCompatActivity {
 		entry = new EntryBusiness().get(entryId);
 		return entry != null;
 	}
+
+	@Override
+	public void onBackPressed() {
+		saveEntry();
+	}
+
+	/**
+	 * When user is done entring data.
+	 */
+	private View.OnClickListener save = new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			saveEntry();
+		}
+	};
 }
