@@ -6,6 +6,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This client will executes javascript commands.
@@ -34,6 +35,12 @@ public class JavascriptRunner extends WebViewClient {
 		return this;
 	}
 
+	/**
+	 * Just to easyfy the task add.
+	 */
+	public void addAll(String ...tasks) {
+		Collections.addAll(this.tasks, tasks);
+	}
 
 	@Override
 	public void onPageFinished(WebView view, String url) {

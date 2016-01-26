@@ -21,9 +21,15 @@ public class RunnerActivity extends AppCompatActivity {
 	private WebView webView;
 	private Entry entry;
 	private JavascriptRunner javascriptRunner;
+	private EntryBusiness entryBusiness;
 
-	private void runEntry() {
-		//TODO I should parse entry body and send to runner.
+	/**
+	 * Run the entry!
+	 */
+	private void runEntry(Entry entry) {
+		String[] commands = entryBusiness.parseCommands(entry);
+		javascriptRunner.addAll(commands);
+		javascriptRunner.start();
 	}
 
 	@Override
@@ -34,9 +40,10 @@ public class RunnerActivity extends AppCompatActivity {
 
 		webView = (WebView) findViewById(R.id.webView);
 		javascriptRunner = new JavascriptRunner(webView);
+		entryBusiness = new EntryBusiness();
 		handleParam(getIntent().getExtras());
 		//TODO add a log for empty param
-		runEntry();
+		runEntry(entry);
 	}
 
 	@Override
@@ -52,7 +59,7 @@ public class RunnerActivity extends AppCompatActivity {
 	 */
 	private boolean handleParam(Bundle savedInstanceState) {
 		if(savedInstanceState == null)
-			savedInstanceState = getIntent().getExtras();;
+			savedInstanceState = getIntent().getExtras();
 
 		if(savedInstanceState == null || !savedInstanceState.containsKey(PARAM_ENTRY_ID))
 			return false;

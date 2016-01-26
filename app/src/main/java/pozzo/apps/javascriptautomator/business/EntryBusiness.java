@@ -34,4 +34,15 @@ public class EntryBusiness {
 	public List<Entry> getAll() {
 		return new Select().from(Entry.class).orderBy(Entry.Col.NAME).execute();
 	}
+
+	/**
+	 * @return Commands isolated.
+	 */
+	public String[] parseCommands(Entry entry) {
+		String commands = entry.getCommands();
+		if(commands == null)
+			return null;
+
+		return commands.split("\n");
+	}
 }
