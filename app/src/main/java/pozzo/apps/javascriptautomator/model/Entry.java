@@ -46,4 +46,13 @@ public class Entry extends Model {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	/**
+	 * @return If this object seems empty.
+	 */
+	public boolean isEmpty() {
+		return (name == null || name.length() == 0)
+				&& (address == null || address.length() == 0)
+				&& (commands == null || commands.length() == 0);
+	}
 }

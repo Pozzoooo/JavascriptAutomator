@@ -63,7 +63,8 @@ public class EntryActivity extends AppCompatActivity {
 
 			@Override
 			protected Void doInBackground(Void... params) {
-				new EntryBusiness().save(entry);
+				if(!entry.isEmpty())
+					new EntryBusiness().save(entry);
 				return null;
 			}
 

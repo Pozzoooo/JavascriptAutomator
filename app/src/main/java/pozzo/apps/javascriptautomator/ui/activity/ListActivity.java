@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -44,6 +45,11 @@ public class ListActivity extends AppCompatActivity {
 		});
 
 		entryBusiness = new EntryBusiness();
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
 		loadList();
 	}
 
@@ -70,8 +76,10 @@ public class ListActivity extends AppCompatActivity {
 				if(isFinishing())
 					return;
 
-				if(rvList == null)
+				if(rvList == null) {
 					rvList = (RecyclerView) findViewById(R.id.rvList);
+					rvList.setLayoutManager(new LinearLayoutManager(ListActivity.this));
+				}
 				if(adapter == null)
 					adapter = new EntryAdapter();
 
