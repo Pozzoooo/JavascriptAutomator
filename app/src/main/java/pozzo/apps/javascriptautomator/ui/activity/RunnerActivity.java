@@ -2,6 +2,7 @@ package pozzo.apps.javascriptautomator.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import pozzo.apps.javascriptautomator.JavascriptRunner;
@@ -28,6 +29,7 @@ public class RunnerActivity extends AppCompatActivity {
 	 */
 	private void runEntry(Entry entry) {
 		String[] commands = entryBusiness.parseCommands(entry);
+		javascriptRunner.add(entry.getAddress());
 		javascriptRunner.addAll(commands);
 		javascriptRunner.start();
 	}
@@ -38,12 +40,21 @@ public class RunnerActivity extends AppCompatActivity {
 
 		setContentView(R.layout.activity_runner);
 
-		webView = (WebView) findViewById(R.id.webView);
-		javascriptRunner = new JavascriptRunner(webView);
 		entryBusiness = new EntryBusiness();
-		handleParam(getIntent().getExtras());
+		handleParam(savedInstanceState);
+		setupWebview();
 		//TODO add a log for empty param
 		runEntry(entry);
+	}
+
+	/**
+	 * Setup webview definitions.
+	 */
+	private void setupWebview() {
+		webView = (WebView) findViewById(R.id.webView);
+		javascriptRunner = new JavascriptRunner(webView);
+		WebSettings settings = webView.getSettings();
+		settings.setJavaScriptEnabled(true);
 	}
 
 	@Override

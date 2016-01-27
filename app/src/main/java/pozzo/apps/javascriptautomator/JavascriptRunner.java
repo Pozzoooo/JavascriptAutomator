@@ -25,6 +25,7 @@ public class JavascriptRunner extends WebViewClient {
 		this.webView = webView;
 		this.uiHandler = new Handler(Looper.getMainLooper());
 		this.tasks = new ArrayList<>();
+		webView.setWebViewClient(this);
 	}
 
 	/**
@@ -60,7 +61,7 @@ public class JavascriptRunner extends WebViewClient {
 		while(!tasks.isEmpty() && current == null) {
 			final String next = tasks.remove(0);
 
-			if(next != null) {
+			if(next != null && next.length() != 0) {
 				current = new Runnable() {
 					@Override
 					public void run() {
