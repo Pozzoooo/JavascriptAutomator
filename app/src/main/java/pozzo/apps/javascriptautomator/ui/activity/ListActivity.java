@@ -22,6 +22,8 @@ import pozzo.apps.javascriptautomator.ui.adapter.EntryAdapter;
  *
  * @author Luiz Gustavo Pozzo
  * @since 21/01/2016
+ *
+ * TODO edit/delete entry
  */
 public class ListActivity extends AppCompatActivity {
 	private EntryBusiness entryBusiness;
@@ -81,11 +83,26 @@ public class ListActivity extends AppCompatActivity {
 					rvList.setLayoutManager(new LinearLayoutManager(ListActivity.this));
 				}
 				if(adapter == null)
-					adapter = new EntryAdapter();
+					adapter = new EntryAdapter(onEntryClick);
 
 				adapter.setEntries(entries);
 				rvList.setAdapter(adapter);
 			}
 		}.execute();
 	}
+
+	/**
+	 * Users wants to do something with the entry...
+	 */
+	private View.OnClickListener onEntryClick = new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			Entry entry = (Entry) v.getTag();
+			if(entry != null) {
+				Intent intent = new Intent(ListActivity.this, RunnerActivity.class);
+				intent.putExtra(RunnerActivity.PARAM_ENTRY_ID, entry.getId());
+				startActivity(intent);
+			}
+		}
+	};
 }
