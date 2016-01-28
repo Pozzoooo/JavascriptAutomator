@@ -22,6 +22,9 @@ import pozzo.apps.javascriptautomator.ui.adapter.EntryAdapter;
  *
  * @author Luiz Gustavo Pozzo
  * @since 21/01/2016
+ *
+ * TODO Fix list layout
+ * TODO Add some click feedback
  */
 public class ListActivity extends AppCompatActivity {
 	private EntryBusiness entryBusiness;
@@ -61,7 +64,7 @@ public class ListActivity extends AppCompatActivity {
 	private void editEntry(Entry entry) {
 		Intent intent = new Intent(ListActivity.this, EntryActivity.class);
 		if(entry != null)
-			intent.putExtra(EntryActivity.POWER_SERVICE, entry.getId());
+			intent.putExtra(EntryActivity.PARAM_ENTRY_ID, entry.getId());
 		startActivity(intent);
 	}
 
