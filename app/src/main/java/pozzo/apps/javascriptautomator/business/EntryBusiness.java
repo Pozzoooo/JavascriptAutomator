@@ -18,6 +18,9 @@ public class EntryBusiness {
 	 * Saves a new entry to database.
 	 */
 	public void save(Entry entry) {
+		//We enforce a protocol before saving, so user can see it when editing
+		if(!entry.getAddress().contains("://"))
+			entry.setAddress("http://" + entry.getAddress());
 		entry.save();
 	}
 
