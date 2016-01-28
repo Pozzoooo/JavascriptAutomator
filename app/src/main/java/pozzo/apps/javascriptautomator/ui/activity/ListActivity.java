@@ -22,8 +22,6 @@ import pozzo.apps.javascriptautomator.ui.adapter.EntryAdapter;
  *
  * @author Luiz Gustavo Pozzo
  * @since 21/01/2016
- *
- * TODO edit/delete entry
  */
 public class ListActivity extends AppCompatActivity {
 	private EntryBusiness entryBusiness;
@@ -42,7 +40,7 @@ public class ListActivity extends AppCompatActivity {
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				newEntry();
+				editEntry(null);
 			}
 		});
 
@@ -57,9 +55,13 @@ public class ListActivity extends AppCompatActivity {
 
 	/**
 	 * Request a new entry.
+	 *
+	 * @param entry If null, request a new entry =].
 	 */
-	private void newEntry() {
+	private void editEntry(Entry entry) {
 		Intent intent = new Intent(ListActivity.this, EntryActivity.class);
+		if(entry != null)
+			intent.putExtra(EntryActivity.POWER_SERVICE, entry.getId());
 		startActivity(intent);
 	}
 
@@ -83,7 +85,7 @@ public class ListActivity extends AppCompatActivity {
 					rvList.setLayoutManager(new LinearLayoutManager(ListActivity.this));
 				}
 				if(adapter == null)
-					adapter = new EntryAdapter(onEntryClick);
+					adapter = new EntryAdapter(onEntryClick, onLongEntryClick);
 
 				adapter.setEntries(entries);
 				rvList.setAdapter(adapter);
@@ -103,6 +105,21 @@ public class ListActivity extends AppCompatActivity {
 				intent.putExtra(RunnerActivity.PARAM_ENTRY_ID, entry.getId());
 				startActivity(intent);
 			}
+		}
+	};
+
+	/**
+	 * To not depends on actionMode (because of api 7) we use long as direct context menu.
+	 */
+	private View.OnLongClickListener onLongEntryClick = new View.OnLongClickListener() {
+		@Override
+		public boolean onLongClick(View v) {
+			Entry entry = (Entry) v.getTag();
+			if(entry != null) {
+				editEntry(entry);
+				return true;
+			}
+			return false;
 		}
 	};
 }

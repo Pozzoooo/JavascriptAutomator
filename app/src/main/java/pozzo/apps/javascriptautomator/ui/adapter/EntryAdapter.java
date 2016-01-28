@@ -20,10 +20,13 @@ import pozzo.apps.javascriptautomator.model.Entry;
 public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> {
 	private List<Entry> entries;
 	private View.OnClickListener onEntryClick;
+	private View.OnLongClickListener onLongEntryClick;
 
-	public EntryAdapter(View.OnClickListener onEntryClick) {
+	public EntryAdapter(View.OnClickListener onEntryClick,
+						View.OnLongClickListener onLongEntryClick) {
 		super();
 		this.onEntryClick = onEntryClick;
+		this.onLongEntryClick = onLongEntryClick;
 	}
 
 	public void setEntries(List<Entry> entries) {
@@ -44,6 +47,7 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
 
 		holder.vgMain.setTag(entry);
 		holder.vgMain.setOnClickListener(onEntryClick);
+		holder.vgMain.setOnLongClickListener(onLongEntryClick);
 		holder.lAddress.setText(entry.getAddress());
 		holder.lName.setText(entry.getName());
 	}

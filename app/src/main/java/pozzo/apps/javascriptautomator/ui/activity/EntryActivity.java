@@ -19,6 +19,7 @@ import pozzo.apps.javascriptautomator.model.Entry;
  * @since 21/01/16.
  *
  * TODO Done discand interface
+ * TODO Delete option
  */
 public class EntryActivity extends AppCompatActivity {
 	public static final String PARAM_ENTRY_ID = "entry";
