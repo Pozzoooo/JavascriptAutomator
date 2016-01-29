@@ -55,4 +55,21 @@ public class Entry extends Model {
 				&& (address == null || address.length() == 0)
 				&& (commands == null || commands.length() == 0);
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(o == null || getClass() != o.getClass()) return false;
+
+		Entry entry = (Entry) o;
+
+		if(name != null ? !name.equals(entry.name) : entry.name != null) return false;
+		if(address != null ? !address.equals(entry.address) : entry.address != null) return false;
+		return !(commands != null ? !commands.equals(entry.commands) : entry.commands != null);
+	}
+
+	@Override
+	public int hashCode() {
+		return 31 + (name != null ? name.hashCode() : 0);
+	}
 }

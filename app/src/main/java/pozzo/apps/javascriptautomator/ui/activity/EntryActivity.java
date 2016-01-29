@@ -1,6 +1,8 @@
 package pozzo.apps.javascriptautomator.ui.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +22,7 @@ import pozzo.apps.javascriptautomator.model.Entry;
  *
  * TODO Done discand interface
  * TODO Delete option
- * TODO Back and discard popup
+ * TODO My savestate will not handle edition ongoing =/
  */
 public class EntryActivity extends AppCompatActivity {
 	public static final String PARAM_ENTRY_ID = "entry";
@@ -31,6 +33,7 @@ public class EntryActivity extends AppCompatActivity {
 	private Button bDone;
 
 	private Entry entry;
+	private EntryBusiness entryBusiness;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class EntryActivity extends AppCompatActivity {
 
 		bDone.setOnClickListener(save);
 
+		entryBusiness = new EntryBusiness();
 		if(handleParam(savedInstanceState))
 			showEntry(entry);
 	}
@@ -53,20 +57,19 @@ public class EntryActivity extends AppCompatActivity {
 	 */
 	private void saveEntry() {
 		new AsyncTask<Void, Void, Void>() {
-			Entry entry;
 			ProgressDialog progressDialog;
 
 			@Override
 			protected void onPreExecute() {
 				progressDialog = ProgressDialog.show(
 						EntryActivity.this, "", getString(R.string.loading));
-				entry = updateEntry();
+				entry = updateEntry(entry);
 			}
 
 			@Override
 			protected Void doInBackground(Void... params) {
 				if(!entry.isEmpty())
-					new EntryBusiness().save(entry);
+					entryBusiness.save(entry);
 				return null;
 			}
 
@@ -81,7 +84,7 @@ public class EntryActivity extends AppCompatActivity {
 	/**
 	 * Update our entry object with view data.
 	 */
-	private Entry updateEntry() {
+	private Entry updateEntry(Entry entry) {
 		if(entry == null)
 			entry = new Entry();
 		entry.setCommands(eCommands.getText().toString());
@@ -118,13 +121,32 @@ public class EntryActivity extends AppCompatActivity {
 			return false;
 
 		long entryId = savedInstanceState.getLong(PARAM_ENTRY_ID);
-		entry = new EntryBusiness().get(entryId);
+		entry = entryBusiness.get(entryId);
 		return entry != null;
 	}
 
 	@Override
 	public void onBackPressed() {
-		saveEntry();
+		Entry editedEntry = updateEntry(new Entry());
+		if(editedEntry.equals(entry)) {
+			super.onBackPressed();
+			return;
+		}
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this)
+				.setMessage(R.string.quitSaving)
+				.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						EntryActivity.super.onBackPressed();
+					}
+				}).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						saveEntry();
+					}
+				});
+		builder.create().show();
 	}
 
 	/**
