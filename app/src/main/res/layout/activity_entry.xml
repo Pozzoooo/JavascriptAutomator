@@ -32,11 +32,4 @@
         android:inputType="textMultiLine"
         android:gravity="top"
         android:hint="@string/commandsInfo"/>
-
-    <Button
-        android:id="@+id/bDone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:text="@string/done"/>
 </LinearLayout>

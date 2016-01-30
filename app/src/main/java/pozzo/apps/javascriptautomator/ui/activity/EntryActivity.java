@@ -6,6 +6,9 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +23,6 @@ import pozzo.apps.javascriptautomator.model.Entry;
  * @author Luiz Gustavo Pozzo
  * @since 21/01/16.
  *
- * TODO Done discand interface
  * TODO Delete option
  * TODO My savestate will not handle edition ongoing =/
  */
@@ -30,7 +32,6 @@ public class EntryActivity extends AppCompatActivity {
 	private EditText eCommands;
 	private EditText eName;
 	private EditText eAddress;
-	private Button bDone;
 
 	private Entry entry;
 	private EntryBusiness entryBusiness;
@@ -43,13 +44,31 @@ public class EntryActivity extends AppCompatActivity {
 		eCommands = (EditText) findViewById(R.id.eCommands);
 		eName = (EditText) findViewById(R.id.eName);
 		eAddress = (EditText) findViewById(R.id.eAddress);
-		bDone = (Button) findViewById(R.id.bDone);
-
-		bDone.setOnClickListener(save);
 
 		entryBusiness = new EntryBusiness();
 		if(handleParam(savedInstanceState))
 			showEntry(entry);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.entry, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.mDone:
+				saveEntry();
+				return true;
+			case R.id.mDiscard:
+				finish();
+				return true;
+			default:
+				return false;
+		}
 	}
 
 	/**
@@ -148,14 +167,4 @@ public class EntryActivity extends AppCompatActivity {
 				});
 		builder.create().show();
 	}
-
-	/**
-	 * When user is done entring data.
-	 */
-	private View.OnClickListener save = new View.OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			saveEntry();
-		}
-	};
 }
