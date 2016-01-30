@@ -1,5 +1,8 @@
 package pozzo.apps.javascriptautomator.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -9,7 +12,7 @@ import com.activeandroid.annotation.Table;
  * @since 21/01/16
  */
 @Table(name = "Entry")
-public class Entry extends Model {
+public class Entry extends Model implements Parcelable {
 	public interface Col {
 		String NAME = "name";
 	}
@@ -71,5 +74,35 @@ public class Entry extends Model {
 	@Override
 	public int hashCode() {
 		return 31 + (name != null ? name.hashCode() : 0);
+	}
+
+	protected Entry(Parcel in) {
+		name = in.readString();
+		address = in.readString();
+		commands = in.readString();
+	}
+
+	public static final Creator<Entry> CREATOR = new Creator<Entry>() {
+		@Override
+		public Entry createFromParcel(Parcel in) {
+			return new Entry(in);
+		}
+
+		@Override
+		public Entry[] newArray(int size) {
+			return new Entry[size];
+		}
+	};
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(name);
+		dest.writeString(address);
+		dest.writeString(commands);
 	}
 }
