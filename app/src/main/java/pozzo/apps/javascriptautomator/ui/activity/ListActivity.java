@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.List;
 
@@ -27,10 +29,13 @@ import pozzo.apps.javascriptautomator.ui.adapter.EntryAdapter;
  * TODO Add some click feedback
  */
 public class ListActivity extends AppCompatActivity {
+	private static final int ST_EDIT_ENTRY = 0x18;
+
 	private EntryBusiness entryBusiness;
 
 	private EntryAdapter adapter;
 	private RecyclerView rvList;
+	private ViewGroup vgMain;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,7 @@ public class ListActivity extends AppCompatActivity {
 		});
 
 		entryBusiness = new EntryBusiness();
+		vgMain = (ViewGroup) findViewById(R.id.vgMain);
 	}
 
 	@Override
@@ -65,7 +71,7 @@ public class ListActivity extends AppCompatActivity {
 		Intent intent = new Intent(ListActivity.this, EntryActivity.class);
 		if(entry != null)
 			intent.putExtra(EntryActivity.PARAM_ENTRY_ID, entry.getId());
-		startActivity(intent);
+		startActivityForResult(intent, ST_EDIT_ENTRY);
 	}
 
 	/**
@@ -94,6 +100,40 @@ public class ListActivity extends AppCompatActivity {
 				rvList.setAdapter(adapter);
 			}
 		}.execute();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+			case ST_EDIT_ENTRY:
+				if(data == null)
+					break;
+				Bundle extra = data.getExtras();
+				if(extra == null || !extra.containsKey(EntryActivity.RES_DELETED_ENTRY))
+					break;
+				Entry deletedEntry = extra.getParcelable(EntryActivity.RES_DELETED_ENTRY);
+				secondChanceSnackDeletion(deletedEntry);
+				break;
+			default:
+				super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
+
+	/**
+	 * Gives user a second chance to undo deleted entry.
+	 */
+	private void secondChanceSnackDeletion(final Entry deletedEntry) {
+		if(deletedEntry == null)
+			return;
+
+		Snackbar.make(vgMain, R.string.deleted, Snackbar.LENGTH_LONG)
+				.setAction(R.string.undo, new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						deletedEntry.save();
+						loadList();
+					}
+				}).show();
 	}
 
 	/**

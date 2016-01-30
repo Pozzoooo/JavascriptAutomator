@@ -3,6 +3,7 @@ package pozzo.apps.javascriptautomator.ui.activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,11 +22,12 @@ import pozzo.apps.javascriptautomator.model.Entry;
  * @author Luiz Gustavo Pozzo
  * @since 21/01/16.
  *
- * TODO Delete option
  * TODO My savestate will not handle edition ongoing =/
+ * TODO Do not show deletion before saving...
  */
 public class EntryActivity extends AppCompatActivity {
 	public static final String PARAM_ENTRY_ID = "entry";
+	public static final String RES_DELETED_ENTRY = "delEntry";
 
 	private EditText eCommands;
 	private EditText eName;
@@ -63,6 +65,9 @@ public class EntryActivity extends AppCompatActivity {
 				return true;
 			case R.id.mDiscard:
 				finish();
+				return true;
+			case R.id.mDelete:
+				deleteEntry(entry);
 				return true;
 			default:
 				return false;
@@ -117,6 +122,19 @@ public class EntryActivity extends AppCompatActivity {
 		eCommands.setText(entry.getCommands());
 		eAddress.setText(entry.getAddress());
 		eName.setText(entry.getName());
+	}
+
+	/**
+	 * Deletes given entry.
+	 */
+	private void deleteEntry(Entry entry) {
+		if(entry != null) {
+			entry.delete();
+			Intent data = new Intent();
+			data.putExtra(RES_DELETED_ENTRY, entry);
+			setResult(RESULT_OK, data);
+		}
+		finish();
 	}
 
 	@Override

@@ -11,4 +11,7 @@
     <string name="address">Address</string>
     <string name="commandsInfo">Commands (one line per command)</string>
     <string name="quitSaving">Save entry?</string>
+    <string name="delete">Delete</string>
+    <string name="deleted">Deleted</string>
+    <string name="undo">Undo</string>
 </resources>

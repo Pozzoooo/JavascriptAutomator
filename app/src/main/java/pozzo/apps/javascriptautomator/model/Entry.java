@@ -26,6 +26,9 @@ public class Entry extends Model implements Parcelable {
 	@Column(name = "commands")
 	private String commands;
 
+	public Entry() {
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -61,14 +64,14 @@ public class Entry extends Model implements Parcelable {
 
 	@Override
 	public boolean equals(Object o) {
-		if(this == o) return true;
-		if(o == null || getClass() != o.getClass()) return false;
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 
 		Entry entry = (Entry) o;
 
-		if(name != null ? !name.equals(entry.name) : entry.name != null) return false;
-		if(address != null ? !address.equals(entry.address) : entry.address != null) return false;
-		return !(commands != null ? !commands.equals(entry.commands) : entry.commands != null);
+		return !(name != null ? !name.equals(entry.name) : entry.name != null)
+				&& !(address != null ? !address.equals(entry.address) : entry.address != null)
+				&& !(commands != null ? !commands.equals(entry.commands) : entry.commands != null);
 	}
 
 	@Override
