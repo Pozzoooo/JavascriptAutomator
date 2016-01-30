@@ -23,7 +23,6 @@ import pozzo.apps.javascriptautomator.model.Entry;
  * @since 21/01/16.
  *
  * TODO My savestate will not handle edition ongoing =/
- * TODO Do not show deletion before saving...
  */
 public class EntryActivity extends AppCompatActivity {
 	public static final String PARAM_ENTRY_ID = "entry";
@@ -54,6 +53,10 @@ public class EntryActivity extends AppCompatActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.entry, menu);
+
+		if(entry == null || entry.getId() == 0)
+			menu.findItem(R.id.mDelete).setVisible(false);
+
 		return true;
 	}
 
