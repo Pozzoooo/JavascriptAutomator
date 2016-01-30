@@ -21,11 +21,10 @@ import pozzo.apps.javascriptautomator.model.Entry;
  *
  * @author Luiz Gustavo Pozzo
  * @since 21/01/16.
- *
- * TODO My savestate will not handle edition ongoing =/
  */
 public class EntryActivity extends AppCompatActivity {
-	public static final String PARAM_ENTRY_ID = "entry";
+	public static final String PARAM_ENTRY_ID = "entryId";
+	public static final String PARAM_ENTRY = "entry";
 	public static final String RES_DELETED_ENTRY = "delEntry";
 
 	private EditText eCommands;
@@ -143,7 +142,7 @@ public class EntryActivity extends AppCompatActivity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		if(entry != null)
-			outState.putLong(PARAM_ENTRY_ID, entry.getId());
+			outState.putParcelable(PARAM_ENTRY, entry);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -155,11 +154,17 @@ public class EntryActivity extends AppCompatActivity {
 		if(savedInstanceState == null)
 			savedInstanceState = getIntent().getExtras();
 
-		if(savedInstanceState == null || !savedInstanceState.containsKey(PARAM_ENTRY_ID))
+		if(savedInstanceState == null || (!savedInstanceState.containsKey(PARAM_ENTRY)
+					&& !savedInstanceState.containsKey(PARAM_ENTRY_ID)))
 			return false;
 
-		long entryId = savedInstanceState.getLong(PARAM_ENTRY_ID);
-		entry = entryBusiness.get(entryId);
+		if(savedInstanceState.containsKey(PARAM_ENTRY))
+			entry = savedInstanceState.getParcelable(PARAM_ENTRY);
+
+		if(entry == null) {
+			long entryId = savedInstanceState.getLong(PARAM_ENTRY);
+			entry = entryBusiness.get(entryId);
+		}
 		return entry != null;
 	}
 

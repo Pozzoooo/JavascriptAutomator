@@ -12,7 +12,7 @@ import com.activeandroid.annotation.Table;
  * @since 21/01/16
  */
 @Table(name = "Entry")
-public class Entry extends Model implements Parcelable {
+public class Entry extends BaseModel implements Parcelable {
 	public interface Col {
 		String NAME = "name";
 	}
@@ -80,6 +80,7 @@ public class Entry extends Model implements Parcelable {
 	}
 
 	protected Entry(Parcel in) {
+		setId(in.readLong());
 		name = in.readString();
 		address = in.readString();
 		commands = in.readString();
@@ -104,6 +105,7 @@ public class Entry extends Model implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeLong(getId());
 		dest.writeString(name);
 		dest.writeString(address);
 		dest.writeString(commands);

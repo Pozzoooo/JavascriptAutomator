@@ -11,6 +11,7 @@ import com.activeandroid.ActiveAndroid;
  * TODO Fix theme
  * TODO Add some help button as sugestions
  * TODO Add an example
+ * TODO Give names to screens
  */
 public class App extends Application {
 	@Override
