@@ -9,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import pozzo.apps.javascriptautomator.R;
@@ -154,12 +152,18 @@ public class EntryActivity extends AppCompatActivity {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this)
 				.setMessage(R.string.quitSaving)
-				.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+				.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						//Does nothing... just stays on the screen
+					}
+				})
+				.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						EntryActivity.super.onBackPressed();
 					}
-				}).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+				}).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						saveEntry();
