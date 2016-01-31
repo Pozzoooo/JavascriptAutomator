@@ -21,6 +21,8 @@ import pozzo.apps.javascriptautomator.model.Entry;
  *
  * @author Luiz Gustavo Pozzo
  * @since 21/01/16.
+ *
+ * TODO Add some help button as sugestions
  */
 public class EntryActivity extends AppCompatActivity {
 	public static final String PARAM_ENTRY_ID = "entryId";
@@ -162,7 +164,7 @@ public class EntryActivity extends AppCompatActivity {
 			entry = savedInstanceState.getParcelable(PARAM_ENTRY);
 
 		if(entry == null) {
-			long entryId = savedInstanceState.getLong(PARAM_ENTRY);
+			long entryId = savedInstanceState.getLong(PARAM_ENTRY_ID);
 			entry = entryBusiness.get(entryId);
 		}
 		return entry != null;

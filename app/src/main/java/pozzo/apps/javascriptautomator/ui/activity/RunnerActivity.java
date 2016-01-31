@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-import pozzo.apps.javascriptautomator.JavascriptRunner;
+import pozzo.apps.javascriptautomator.core.JavascriptRunner;
 import pozzo.apps.javascriptautomator.R;
 import pozzo.apps.javascriptautomator.business.EntryBusiness;
 import pozzo.apps.javascriptautomator.model.Entry;

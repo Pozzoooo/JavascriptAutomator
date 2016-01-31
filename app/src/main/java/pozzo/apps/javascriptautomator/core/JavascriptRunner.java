@@ -1,4 +1,4 @@
-package pozzo.apps.javascriptautomator;
+package pozzo.apps.javascriptautomator.core;
 
 import android.os.Handler;
 import android.os.Looper;

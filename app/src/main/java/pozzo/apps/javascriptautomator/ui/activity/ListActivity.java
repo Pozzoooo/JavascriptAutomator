@@ -70,7 +70,7 @@ public class ListActivity extends AppCompatActivity {
 	private void editEntry(Entry entry) {
 		Intent intent = new Intent(ListActivity.this, EntryActivity.class);
 		if(entry != null)
-			intent.putExtra(EntryActivity.PARAM_ENTRY, entry.getId());
+			intent.putExtra(EntryActivity.PARAM_ENTRY_ID, entry.getId());
 		startActivityForResult(intent, ST_EDIT_ENTRY);
 	}
 

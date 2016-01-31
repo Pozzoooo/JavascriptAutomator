@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">JavascriptAutomator</string>
-    <string name="action_settings">Settings</string>
+    <!-- System -->
+    <string name="appName">JavascriptAutomator</string>
+
+    <!-- Baisc -->
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="cancel">Cancel</string>
@@ -9,9 +11,12 @@
     <string name="discard">Discard</string>
     <string name="name">Name</string>
     <string name="address">Address</string>
-    <string name="commandsInfo">Commands (one line per command)</string>
-    <string name="quitSaving">Save entry?</string>
     <string name="delete">Delete</string>
     <string name="deleted">Deleted</string>
     <string name="undo">Undo</string>
+
+    <!-- Specialized -->
+    <string name="quitSaving">Save entry?</string>
+    <string name="sampleTitle">Google search</string>
+    <string name="commandsInfo">Commands (one line per command)</string>
 </resources>
