@@ -17,7 +17,7 @@
 
         <activity
             android:name=".ui.activity.ListActivity"
-            android:label="@string/appName"
+            android:label="@string/title_entryList"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -25,8 +25,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.EntryActivity" />
-        <activity android:name=".ui.activity.RunnerActivity" />
+        <activity
+            android:name=".ui.activity.EntryActivity"
+            android:label="@string/title_editEntry"/>
+
+        <activity
+            android:name=".ui.activity.RunnerActivity"
+            android:label="@string/title_runner"/>
     </application>
 
 </manifest>

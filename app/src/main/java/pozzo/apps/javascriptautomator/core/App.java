@@ -9,8 +9,9 @@ import com.activeandroid.ActiveAndroid;
  * @since 21/01/16.
  *
  * TODO Fix theme
- * TODO Add an example
- * TODO Give names to screens
+ * TODO Test what?!
+ * TODO Translate to portuguese
+ * TODO Create a launcher
  */
 public class App extends Application {
 	@Override

@@ -19,4 +19,9 @@
     <string name="quitSaving">Save entry?</string>
     <string name="sampleTitle">Google search</string>
     <string name="commandsInfo">Commands (one line per command)</string>
+
+    <!-- Screen title -->
+    <string name="title_entryList">Saved entries</string>
+    <string name="title_editEntry">Entry data</string>
+    <string name="title_runner">Execution</string>
 </resources>
