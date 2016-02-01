@@ -11,7 +11,6 @@ import com.activeandroid.ActiveAndroid;
  * TODO Fix theme
  * TODO Add an example
  * TODO Give names to screens
- * TODO whats wrong with .value?
  */
 public class App extends Application {
 	@Override

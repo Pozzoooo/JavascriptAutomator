@@ -38,7 +38,7 @@ public class SamepleEntry {
 		entry.setName(context.getString(R.string.sampleTitle));
 
 		String command = ""
-				+ "javascript:document.getElementById(\"lst-ib\").value = \"Luiz Gustavo Pozzo\";\n"
+				+ "javascript:document.getElementById(\"lst-ib\").value = \"Luiz Gustavo Pozzo\";"
 				+ "javascript:document.getElementById(\"tsf\").submit();";
 		entry.setCommands(command);
 		return entry;
