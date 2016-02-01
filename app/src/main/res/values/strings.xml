@@ -1,6 +1,6 @@
 <resources>
     <!-- System -->
-    <string name="appName">JavascriptAutomator</string>
+    <string name="appName">Javascript Automator</string>
 
     <!-- Baisc -->
     <string name="yes">Yes</string>

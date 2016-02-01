@@ -8,7 +8,6 @@ import com.activeandroid.ActiveAndroid;
  * @author Luiz Gustavo Pozzo
  * @since 21/01/16.
  *
- * TODO Fix theme
  * TODO Test what?!
  * TODO Translate to portuguese
  * TODO Create a launcher
