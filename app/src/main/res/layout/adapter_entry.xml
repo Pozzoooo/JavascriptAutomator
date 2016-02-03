@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/vgMain"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/margin_big"
+    android:paddingRight="@dimen/margin_big"
+    android:paddingBottom="@dimen/margin_medium"
+    android:paddingTop="@dimen/margin_medium"
+    android:background="?attr/selectableItemBackground">
 
     <TextView
         android:id="@+id/lName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        tools:text="Name"/>
 
     <TextView
         android:id="@+id/lAddress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_secondary"
+        tools:text="http://google.com"/>
 </LinearLayout>

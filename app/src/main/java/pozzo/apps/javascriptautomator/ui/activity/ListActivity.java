@@ -25,7 +25,7 @@ import pozzo.apps.javascriptautomator.ui.adapter.EntryAdapter;
  * @author Luiz Gustavo Pozzo
  * @since 21/01/2016
  *
- * TODO Fix list layout
+ * TODO Search
  * TODO Add some click feedback
  */
 public class ListActivity extends AppCompatActivity {
