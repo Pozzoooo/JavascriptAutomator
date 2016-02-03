@@ -5,10 +5,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -26,9 +30,8 @@ import pozzo.apps.javascriptautomator.ui.adapter.EntryAdapter;
  * @since 21/01/2016
  *
  * TODO Search
- * TODO Add some click feedback
  */
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 	private static final int ST_EDIT_ENTRY = 0x18;
 
 	private EntryBusiness entryBusiness;
@@ -165,4 +168,27 @@ public class ListActivity extends AppCompatActivity {
 			return false;
 		}
 	};
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.list, menu);
+
+		MenuItem item = menu.findItem(R.id.mSearch);
+		SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+		searchView.setQueryHint(getString(android.R.string.search_go));
+		searchView.setOnQueryTextListener(this);
+		return true;
+	}
+
+	@Override
+	public boolean onQueryTextChange(String query) {
+		if(adapter != null)
+			adapter.getFilter().filter(query);
+		return true;
+	}
+
+	@Override
+	public boolean onQueryTextSubmit(String query) {
+		return false;
+	}
 }

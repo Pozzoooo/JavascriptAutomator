@@ -4,8 +4,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pozzo.apps.javascriptautomator.R;
@@ -17,8 +20,10 @@ import pozzo.apps.javascriptautomator.model.Entry;
  * @author Luiz Gustavo Pozzo
  * @since 21/01/16.
  */
-public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> {
+public class EntryAdapter
+		extends RecyclerView.Adapter<EntryAdapter.ViewHolder> implements Filterable {
 	private List<Entry> entries;
+	private List<Entry> original;
 	private View.OnClickListener onEntryClick;
 	private View.OnLongClickListener onLongEntryClick;
 
@@ -27,6 +32,7 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
 		super();
 		this.onEntryClick = onEntryClick;
 		this.onLongEntryClick = onLongEntryClick;
+		setHasStableIds(true);
 	}
 
 	public void setEntries(List<Entry> entries) {
@@ -55,6 +61,52 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.ViewHolder> 
 	@Override
 	public int getItemCount() {
 		return entries != null ? entries.size() : 0;
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return entries.get(position).getId();
+	}
+
+	@Override
+	public Filter getFilter() {
+		return new Filter() {
+			@Override
+			protected FilterResults performFiltering(CharSequence constraint) {
+				FilterResults result = new FilterResults();
+
+				if(original == null)
+					original = new ArrayList<>(entries);
+
+				if(constraint == null || constraint.length() == 0) {
+					result.count = original.size();
+					result.values = original;
+				} else {
+					constraint = constraint.toString().toLowerCase();
+
+					ArrayList<Entry> newValues = new ArrayList<>();
+					for(Entry it : original) {
+						String compare =
+								(it.getName() + it.getAddress() + it.getCommands()).toLowerCase();
+						if(compare.contains(constraint)) {
+							newValues.add(it);
+						}
+					}
+
+					result.values = newValues;
+					result.count = newValues.size();
+				}
+
+				return result;
+			}
+
+			@Override
+			protected void publishResults(CharSequence constraint, FilterResults results) {
+				//noinspection unchecked
+				entries = (List<Entry>) results.values;
+				notifyDataSetChanged();
+			}
+		};
 	}
 
 	public class ViewHolder extends RecyclerView.ViewHolder {
