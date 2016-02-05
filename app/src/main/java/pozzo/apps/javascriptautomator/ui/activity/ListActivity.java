@@ -28,8 +28,6 @@ import pozzo.apps.javascriptautomator.ui.adapter.EntryAdapter;
  *
  * @author Luiz Gustavo Pozzo
  * @since 21/01/2016
- *
- * TODO Search
  */
 public class ListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 	private static final int ST_EDIT_ENTRY = 0x18;

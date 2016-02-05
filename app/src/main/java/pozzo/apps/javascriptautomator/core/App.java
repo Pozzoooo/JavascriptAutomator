@@ -10,7 +10,6 @@ import com.activeandroid.ActiveAndroid;
  *
  * TODO Test what?!
  * TODO Translate to portuguese
- * TODO Create a launcher
  */
 public class App extends Application {
 	@Override
@@ -21,7 +20,7 @@ public class App extends Application {
 		/* Trigger this on db creation would be probably a better approach, but I dont think I can
 		 		do it with AA.
 		   And if you know a better way to avoid this IO, pleas tell me.
-		  */
+		*/
 		SamepleEntry samepleEntry = new SamepleEntry();
 		if(samepleEntry.shouldCreateExample())
 			samepleEntry.create(this).save();
