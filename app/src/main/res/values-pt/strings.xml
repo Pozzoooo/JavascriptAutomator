@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- System -->
+    <string name="appName">Javascript Automator</string>
+
+    <!-- Baisc -->
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="cancel">Cancelar</string>
+    <string name="loading">Carregando</string>
+    <string name="done">Concluído</string>
+    <string name="discard">Descartar</string>
+    <string name="name">Nome</string>
+    <string name="address">Endereço</string>
+    <string name="delete">Excluir</string>
+    <string name="deleted">Excluido</string>
+    <string name="undo">Desfazer</string>
+
+    <!-- Specialized -->
+    <string name="quitSaving">Salvar?</string>
+    <string name="sampleTitle">Busca no Google</string>
+    <string name="commandsInfo">Comandos (uma linha por comando)</string>
+
+    <!-- Screen title -->
+    <string name="title_entryList">Itens salvos</string>
+    <string name="title_editEntry">Detalhes</string>
+    <string name="title_runner">Execuçao</string>
+</resources>

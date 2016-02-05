@@ -9,7 +9,6 @@ import com.activeandroid.ActiveAndroid;
  * @since 21/01/16.
  *
  * TODO Test what?!
- * TODO Translate to portuguese
  */
 public class App extends Application {
 	@Override
