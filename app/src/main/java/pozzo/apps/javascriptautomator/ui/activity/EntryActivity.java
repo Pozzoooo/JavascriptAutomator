@@ -23,6 +23,8 @@ import pozzo.apps.javascriptautomator.model.Entry;
  * @since 21/01/16.
  *
  * TODO Add some help button as sugestions
+ * TODO Window auto resize.
+ * TODO Add button plus is green?
  */
 public class EntryActivity extends AppCompatActivity {
 	public static final String PARAM_ENTRY_ID = "entryId";
@@ -173,7 +175,7 @@ public class EntryActivity extends AppCompatActivity {
 	@Override
 	public void onBackPressed() {
 		Entry editedEntry = updateEntry(new Entry());
-		if(editedEntry.equals(entry)) {
+		if(editedEntry.equals(entry) || entry == null || entry.isEmpty()) {
 			super.onBackPressed();
 			return;
 		}

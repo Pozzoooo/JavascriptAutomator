@@ -79,6 +79,9 @@ public class Entry extends BaseModel implements Parcelable {
 		return 31 + (name != null ? name.hashCode() : 0);
 	}
 
+	/**
+	 * -- For Parcelable implementation --
+	 */
 	protected Entry(Parcel in) {
 		setId(in.readLong());
 		name = in.readString();

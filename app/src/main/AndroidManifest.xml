@@ -17,7 +17,7 @@
 
         <activity
             android:name=".ui.activity.ListActivity"
-            android:label="@string/title_entryList"
+            android:label="@string/appName"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
