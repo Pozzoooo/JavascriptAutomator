@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,7 +25,6 @@ import pozzo.apps.javascriptautomator.model.Entry;
  * @since 21/01/16.
  *
  * TODO Add some help button as sugestions
- * TODO Window auto resize.
  * TODO Add button plus is green?
  */
 public class EntryActivity extends AppCompatActivity {
@@ -47,6 +48,10 @@ public class EntryActivity extends AppCompatActivity {
 		eName = (EditText) findViewById(R.id.eName);
 		eAddress = (EditText) findViewById(R.id.eAddress);
 
+		ActionBar actionBar = getSupportActionBar();
+		if(actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 		entryBusiness = new EntryBusiness();
 		if(handleParam(savedInstanceState))
 			showEntry(entry);
@@ -74,6 +79,9 @@ public class EntryActivity extends AppCompatActivity {
 				return true;
 			case R.id.mDelete:
 				deleteEntry(entry);
+				return true;
+			case android.R.id.home:
+				NavUtils.navigateUpFromSameTask(this);
 				return true;
 			default:
 				return false;

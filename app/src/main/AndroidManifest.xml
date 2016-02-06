@@ -27,7 +27,14 @@
 
         <activity
             android:name=".ui.activity.EntryActivity"
-            android:label="@string/title_editEntry"/>
+            android:label="@string/title_editEntry"
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".ui.activity.ListActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.ListActivity" />
+        </activity>
 
         <activity
             android:name=".ui.activity.RunnerActivity"
