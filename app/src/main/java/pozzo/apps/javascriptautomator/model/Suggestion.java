@@ -25,6 +25,15 @@ public class Suggestion extends BaseModel {
 	@Column(name = "order")
 	private int order;
 
+	public Suggestion() {
+	}
+
+	public Suggestion(String displayName, String value) {
+		this.displayName = displayName;
+		this.value = value;
+		this.order = Integer.MAX_VALUE;
+	}
+
 	public String getDisplayName() {
 		return displayName;
 	}

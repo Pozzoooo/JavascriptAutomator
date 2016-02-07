@@ -1,4 +1,4 @@
-package pozzo.apps.javascriptautomator.core;
+package pozzo.apps.javascriptautomator.core.init;
 
 import android.content.Context;
 
@@ -14,17 +14,17 @@ import pozzo.apps.javascriptautomator.model.Entry;
  * @author Luiz Gustavo Pozzo
  * @since 31/01/2016.
  */
-public class SampleEntry {
+public class SampleEntryCreator {
 	private EntryBusiness business;
 
-	public SampleEntry() {
+	public SampleEntryCreator() {
 		business = new EntryBusiness();
 	}
 
 	/**
 	 * @return If false, you should not create an example.
 	 */
-	public boolean shouldCreateExample() {
+	public boolean shouldCreateSample() {
 		List<Entry> allEntries = business.getAll();
 		return allEntries == null || allEntries.isEmpty();
 	}
