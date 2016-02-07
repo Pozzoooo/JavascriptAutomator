@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,6 +36,7 @@ public class EntryActivity extends AppCompatActivity {
 	private EditText eCommands;
 	private EditText eName;
 	private EditText eAddress;
+	private RecyclerView rvSuggestions;
 
 	private Entry entry;
 	private EntryBusiness entryBusiness;
@@ -47,6 +49,7 @@ public class EntryActivity extends AppCompatActivity {
 		eCommands = (EditText) findViewById(R.id.eCommands);
 		eName = (EditText) findViewById(R.id.eName);
 		eAddress = (EditText) findViewById(R.id.eAddress);
+		rvSuggestions = (RecyclerView) findViewById(R.id.rvSuggestions);
 
 		ActionBar actionBar = getSupportActionBar();
 		if(actionBar != null) {
