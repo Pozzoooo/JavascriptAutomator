@@ -46,6 +46,7 @@ public class EntryBusiness {
 		if(commands == null)
 			return null;
 
+		commands = commands.replaceAll("[\n]{2,}", "\n");
 		return commands.split("\n");
 	}
 }
