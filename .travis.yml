@@ -8,3 +8,4 @@ android:
 
   script:
     - ./gradlew clean testDebugUnitTest
+    - ./gradlew test --continue
