@@ -2,6 +2,7 @@ package pozzo.apps.javascriptautomator.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.provider.BaseColumns;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
@@ -11,7 +12,7 @@ import com.activeandroid.annotation.Table;
  * @author Luiz Gustavo Pozzo
  * @since 21/01/16
  */
-@Table(name = "Entry")
+@Table(name = "Entry", id = BaseColumns._ID)
 public class Entry extends BaseModel implements Parcelable {
 	public interface Col {
 		String NAME = "name";

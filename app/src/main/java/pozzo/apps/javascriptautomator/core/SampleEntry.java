@@ -14,10 +14,10 @@ import pozzo.apps.javascriptautomator.model.Entry;
  * @author Luiz Gustavo Pozzo
  * @since 31/01/2016.
  */
-public class SamepleEntry {
+public class SampleEntry {
 	private EntryBusiness business;
 
-	public SamepleEntry() {
+	public SampleEntry() {
 		business = new EntryBusiness();
 	}
 

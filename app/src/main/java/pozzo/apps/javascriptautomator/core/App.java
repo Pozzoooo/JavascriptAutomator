@@ -20,8 +20,8 @@ public class App extends Application {
 		 		do it with AA.
 		   And if you know a better way to avoid this IO, pleas tell me.
 		*/
-		SamepleEntry samepleEntry = new SamepleEntry();
-		if(samepleEntry.shouldCreateExample())
-			samepleEntry.create(this).save();
+		SampleEntry sampleEntry = new SampleEntry();
+		if(sampleEntry.shouldCreateExample())
+			sampleEntry.create(this).save();
 	}
 }

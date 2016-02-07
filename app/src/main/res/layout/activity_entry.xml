@@ -28,12 +28,16 @@
         <EditText
             android:id="@+id/eCommands"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:minLines="7"
             android:singleLine="false"
             android:inputType="textMultiLine"
             android:gravity="top"
             android:hint="@string/commandsInfo"/>
+        
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvSuggestions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </ScrollView>
