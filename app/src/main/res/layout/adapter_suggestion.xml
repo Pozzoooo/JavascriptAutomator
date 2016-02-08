@@ -9,7 +9,7 @@
     <Button
         android:id="@+id/bSuggestion"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/button_heigth"
         android:textAllCaps="false"
         tools:text="javascript"/>
 </LinearLayout>

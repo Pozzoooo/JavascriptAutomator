@@ -9,15 +9,21 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import java.util.List;
+
 import pozzo.apps.javascriptautomator.R;
 import pozzo.apps.javascriptautomator.business.EntryBusiness;
+import pozzo.apps.javascriptautomator.business.SuggestionBusiness;
 import pozzo.apps.javascriptautomator.model.Entry;
+import pozzo.apps.javascriptautomator.model.Suggestion;
+import pozzo.apps.javascriptautomator.ui.adapter.SuggestionAdapter;
 
 /**
  * Where you can view/edit an entry.
@@ -58,6 +64,7 @@ public class EntryActivity extends AppCompatActivity {
 		entryBusiness = new EntryBusiness();
 		if(handleParam(savedInstanceState))
 			showEntry(entry);
+		loadSuggestions();
 	}
 
 	@Override
@@ -211,5 +218,27 @@ public class EntryActivity extends AppCompatActivity {
 					}
 				});
 		builder.create().show();
+	}
+
+	/**
+	 * Loads suggestion list to be displayed.
+	 */
+	private void loadSuggestions() {
+		new AsyncTask<Void, Void, List<Suggestion>>() {
+			@Override
+			protected List<Suggestion> doInBackground(Void... params) {
+				return new SuggestionBusiness().getAll();
+			}
+
+			@Override
+			protected void onPostExecute(List<Suggestion> suggestions) {
+				LinearLayoutManager layoutManager = new LinearLayoutManager(
+						EntryActivity.this, LinearLayoutManager.HORIZONTAL, false);
+				rvSuggestions.setLayoutManager(layoutManager);
+
+				SuggestionAdapter adapter = new SuggestionAdapter(suggestions);
+				rvSuggestions.setAdapter(adapter);
+			}
+		}.execute();
 	}
 }

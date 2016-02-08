@@ -22,8 +22,8 @@ public class Suggestion extends BaseModel {
 	@Column(name = "value")
 	private String value;
 
-	@Column(name = "order")
-	private int order;
+	@Column(name = "position")
+	private int position;
 
 	public Suggestion() {
 	}
@@ -31,7 +31,7 @@ public class Suggestion extends BaseModel {
 	public Suggestion(String displayName, String value) {
 		this.displayName = displayName;
 		this.value = value;
-		this.order = Integer.MAX_VALUE;
+		this.position = Integer.MAX_VALUE;
 	}
 
 	public String getDisplayName() {
@@ -50,11 +50,11 @@ public class Suggestion extends BaseModel {
 		this.value = value;
 	}
 
-	public int getOrder() {
-		return order;
+	public int getPosition() {
+		return position;
 	}
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setPosition(int position) {
+		this.position = position;
 	}
 }

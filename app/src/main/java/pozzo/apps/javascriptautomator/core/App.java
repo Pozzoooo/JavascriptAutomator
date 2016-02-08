@@ -16,6 +16,7 @@ import pozzo.apps.javascriptautomator.model.Suggestion;
  * @since 21/01/16.
  *
  * TODO Test what?!
+ * TODO add mint
  */
 public class App extends Application {
 	@Override
