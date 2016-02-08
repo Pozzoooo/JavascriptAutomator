@@ -12,10 +12,11 @@ import pozzo.apps.javascriptautomator.core.init.SuggestionsCreator;
 import pozzo.apps.javascriptautomator.model.Suggestion;
 
 /**
+ * Well, this is the start point of everything...
+ *
  * @author Luiz Gustavo Pozzo
  * @since 21/01/16.
  *
- * TODO Test what?!
  * TODO add mint
  */
 public class App extends Application {
