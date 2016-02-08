@@ -91,7 +91,7 @@ public class EntryActivity extends AppCompatActivity {
 				deleteEntry(entry);
 				return true;
 			case android.R.id.home:
-				NavUtils.navigateUpFromSameTask(this);
+				exit(true);
 				return true;
 			default:
 				return false;
@@ -192,6 +192,15 @@ public class EntryActivity extends AppCompatActivity {
 
 	@Override
 	public void onBackPressed() {
+		exit(false);
+	}
+
+	/**
+	 * Quits Activity.
+	 *
+	 * @param withNavUtils false for onBackPressed or true for NavUtils.
+	 */
+	private void exit(final boolean withNavUtils) {
 		Entry editedEntry = updateEntry(new Entry());
 		if(editedEntry.equals(entry) || editedEntry.isEmpty()) {
 			super.onBackPressed();
@@ -209,7 +218,10 @@ public class EntryActivity extends AppCompatActivity {
 				.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						EntryActivity.super.onBackPressed();
+						if(withNavUtils)
+							NavUtils.navigateUpFromSameTask(EntryActivity.this);
+						else
+							EntryActivity.super.onBackPressed();
 					}
 				}).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 					@Override
