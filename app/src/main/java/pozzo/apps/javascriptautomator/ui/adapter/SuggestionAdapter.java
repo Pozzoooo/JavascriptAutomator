@@ -19,9 +19,11 @@ import pozzo.apps.javascriptautomator.model.Suggestion;
  */
 public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.ViewHolder> {
 	private List<Suggestion> suggestions;
+	private SuggestionInteraction callback;
 
-	public SuggestionAdapter(List<Suggestion> suggestions) {
+	public SuggestionAdapter(List<Suggestion> suggestions, SuggestionInteraction callback) {
 		this.suggestions = suggestions;
+		this.callback = callback;
 	}
 
 	@Override
@@ -35,11 +37,30 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Vi
 	public void onBindViewHolder(ViewHolder holder, int position) {
 		Suggestion suggestion = suggestions.get(position);
 		holder.bSuggetion.setText(suggestion.getDisplayName());
+		holder.bSuggetion.setTag(suggestion);
 	}
 
 	@Override
 	public int getItemCount() {
 		return suggestions.size();
+	}
+
+	/**
+	 * Click event.
+	 */
+	private View.OnClickListener onSuggestionClick = new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			if(callback != null)
+				callback.onSuggestionClick((Suggestion) v.getTag());
+		}
+	};
+
+	/**
+	 * To receive the click events.
+	 */
+	public interface SuggestionInteraction {
+		void onSuggestionClick(Suggestion suggestion);
 	}
 
 	public class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,6 +70,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Vi
 			super(itemView);
 
 			bSuggetion = (Button) itemView.findViewById(R.id.bSuggestion);
+			bSuggetion.setOnClickListener(onSuggestionClick);
 		}
 	}
 }

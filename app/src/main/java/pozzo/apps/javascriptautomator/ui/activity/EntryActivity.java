@@ -31,8 +31,8 @@ import pozzo.apps.javascriptautomator.ui.adapter.SuggestionAdapter;
  * @author Luiz Gustavo Pozzo
  * @since 21/01/16.
  *
- * TODO Add some help button as sugestions
  * TODO Add button plus is green?
+ * TODO Place suggestion on cursor position
  */
 public class EntryActivity extends AppCompatActivity {
 	public static final String PARAM_ENTRY_ID = "entryId";
@@ -193,7 +193,7 @@ public class EntryActivity extends AppCompatActivity {
 	@Override
 	public void onBackPressed() {
 		Entry editedEntry = updateEntry(new Entry());
-		if(editedEntry.equals(entry) || entry == null || entry.isEmpty()) {
+		if(editedEntry.equals(entry) || editedEntry.isEmpty()) {
 			super.onBackPressed();
 			return;
 		}
@@ -235,10 +235,19 @@ public class EntryActivity extends AppCompatActivity {
 				LinearLayoutManager layoutManager = new LinearLayoutManager(
 						EntryActivity.this, LinearLayoutManager.HORIZONTAL, false);
 				rvSuggestions.setLayoutManager(layoutManager);
-
-				SuggestionAdapter adapter = new SuggestionAdapter(suggestions);
-				rvSuggestions.setAdapter(adapter);
+				rvSuggestions.setAdapter(new SuggestionAdapter(suggestions, suggestionInteraction));
 			}
 		}.execute();
 	}
+
+	/**
+	 * Receives suggestions events.
+	 */
+	private SuggestionAdapter.SuggestionInteraction suggestionInteraction =
+			new SuggestionAdapter.SuggestionInteraction() {
+		@Override
+		public void onSuggestionClick(Suggestion suggestion) {
+			eCommands.setText(eCommands.getText() + suggestion.getValue());
+		}
+	};
 }
