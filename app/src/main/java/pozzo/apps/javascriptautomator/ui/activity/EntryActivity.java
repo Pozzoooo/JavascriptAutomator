@@ -14,7 +14,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ScrollView;
 
 import java.util.List;
 
@@ -43,6 +45,7 @@ public class EntryActivity extends AppCompatActivity {
 	private EditText eName;
 	private EditText eAddress;
 	private RecyclerView rvSuggestions;
+	private ScrollView scrollView;
 
 	private Entry entry;
 	private EntryBusiness entryBusiness;
@@ -56,6 +59,9 @@ public class EntryActivity extends AppCompatActivity {
 		eName = (EditText) findViewById(R.id.eName);
 		eAddress = (EditText) findViewById(R.id.eAddress);
 		rvSuggestions = (RecyclerView) findViewById(R.id.rvSuggestions);
+		scrollView = (ScrollView) findViewById(R.id.scrollView);
+
+		eCommands.setOnFocusChangeListener(eCommandsFocus);
 
 		ActionBar actionBar = getSupportActionBar();
 		if(actionBar != null) {
@@ -261,6 +267,26 @@ public class EntryActivity extends AppCompatActivity {
 		public void onSuggestionClick(Suggestion suggestion) {
 			int position = TextUtil.insertIntoCursorPosition(eCommands, suggestion.getValue());
 			eCommands.setSelection(position + suggestion.getCursor());
+		}
+	};
+
+	/**
+	 * So we can show the important things to the user.
+	 */
+	private View.OnFocusChangeListener eCommandsFocus = new View.OnFocusChangeListener() {
+		@Override
+		public void onFocusChange(View v, boolean hasFocus) {
+			if(scrollView == null || scrollView.getHandler() == null)
+				return;//May ocurrur on config changes
+
+			if(hasFocus) {
+				scrollView.getHandler().post(new Runnable() {
+					@Override
+					public void run() {
+						scrollView.smoothScrollTo(0, rvSuggestions.getBottom());
+					}
+				});
+			}
 		}
 	};
 }

@@ -22,7 +22,7 @@ public class TextUtil {
 			return 0;
 		int position = insert.getSelectionStart();
 		String currentText = insert.getText().toString();
-		if(position < 0 || position >= currentText.length())
+		if(position < 0 || position > currentText.length())
 			position = 0;
 		String resultText = currentText.substring(0, position);
 		resultText += text;
