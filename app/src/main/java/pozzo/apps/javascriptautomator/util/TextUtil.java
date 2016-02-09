@@ -15,10 +15,11 @@ public class TextUtil {
 	 *
 	 * @param insert Where will be inserted, usually an EditText.
 	 * @param text to be inserted.
+	 * @return Where the text have been inserted.
 	 */
-	public static void insertIntoCursorPosition(TextView insert, String text) {
+	public static int insertIntoCursorPosition(TextView insert, String text) {
 		if(insert == null)
-			return;
+			return 0;
 		int position = insert.getSelectionStart();
 		String currentText = insert.getText().toString();
 		if(position < 0 || position >= currentText.length())
@@ -27,5 +28,6 @@ public class TextUtil {
 		resultText += text;
 		resultText += currentText.substring(position);
 		insert.setText(resultText);
+		return position;
 	}
 }

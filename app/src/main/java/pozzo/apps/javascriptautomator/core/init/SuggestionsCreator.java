@@ -32,7 +32,7 @@ public class SuggestionsCreator {
 
 		//TODO increase our suggestion database
 		Suggestion suggestion = new Suggestion("submit",
-				"javascript:document.getElementById(\"\").submit()");
+				"javascript:document.getElementById(\"\").submit()", 36);
 
 		suggestions.add(suggestion);
 

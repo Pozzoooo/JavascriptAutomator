@@ -25,12 +25,16 @@ public class Suggestion extends BaseModel {
 	@Column(name = "position")
 	private int position;
 
+	@Column(name = "cursor")
+	private int cursor;
+
 	public Suggestion() {
 	}
 
-	public Suggestion(String displayName, String value) {
+	public Suggestion(String displayName, String value, int cursor) {
 		this.displayName = displayName;
 		this.value = value;
+		this.cursor = cursor;
 		this.position = Integer.MAX_VALUE;
 	}
 
@@ -56,5 +60,16 @@ public class Suggestion extends BaseModel {
 
 	public void setPosition(int position) {
 		this.position = position;
+	}
+
+	public int getCursor() {
+		return cursor;
+	}
+
+	/**
+	 * Where cursor should be moved to.
+	 */
+	public void setCursor(int cursor) {
+		this.cursor = cursor;
 	}
 }

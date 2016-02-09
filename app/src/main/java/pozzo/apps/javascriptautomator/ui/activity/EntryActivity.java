@@ -33,7 +33,6 @@ import pozzo.apps.javascriptautomator.util.TextUtil;
  * @since 21/01/16.
  *
  * TODO Add button plus is green?
- * TODO Place suggestion on cursor position
  */
 public class EntryActivity extends AppCompatActivity {
 	public static final String PARAM_ENTRY_ID = "entryId";
@@ -260,7 +259,8 @@ public class EntryActivity extends AppCompatActivity {
 			new SuggestionAdapter.SuggestionInteraction() {
 		@Override
 		public void onSuggestionClick(Suggestion suggestion) {
-			TextUtil.insertIntoCursorPosition(eCommands, suggestion.getValue());
+			int position = TextUtil.insertIntoCursorPosition(eCommands, suggestion.getValue());
+			eCommands.setSelection(position + suggestion.getCursor());
 		}
 	};
 }
