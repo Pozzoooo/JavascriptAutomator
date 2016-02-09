@@ -24,6 +24,7 @@ import pozzo.apps.javascriptautomator.business.SuggestionBusiness;
 import pozzo.apps.javascriptautomator.model.Entry;
 import pozzo.apps.javascriptautomator.model.Suggestion;
 import pozzo.apps.javascriptautomator.ui.adapter.SuggestionAdapter;
+import pozzo.apps.javascriptautomator.util.TextUtil;
 
 /**
  * Where you can view/edit an entry.
@@ -259,7 +260,7 @@ public class EntryActivity extends AppCompatActivity {
 			new SuggestionAdapter.SuggestionInteraction() {
 		@Override
 		public void onSuggestionClick(Suggestion suggestion) {
-			eCommands.setText(eCommands.getText() + suggestion.getValue());
+			TextUtil.insertIntoCursorPosition(eCommands, suggestion.getValue());
 		}
 	};
 }
