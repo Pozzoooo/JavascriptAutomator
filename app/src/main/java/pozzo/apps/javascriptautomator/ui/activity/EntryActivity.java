@@ -33,8 +33,6 @@ import pozzo.apps.javascriptautomator.util.TextUtil;
  *
  * @author Luiz Gustavo Pozzo
  * @since 21/01/16.
- *
- * TODO Add button plus is green?
  */
 public class EntryActivity extends AppCompatActivity {
 	public static final String PARAM_ENTRY_ID = "entryId";
