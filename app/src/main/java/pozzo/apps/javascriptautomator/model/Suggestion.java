@@ -14,6 +14,7 @@ import com.activeandroid.annotation.Table;
 @Table(name = "Suggestion", id = BaseColumns._ID)
 public class Suggestion extends BaseModel {
 	public interface Col {
+		String POSITION = "position";
 	}
 
 	@Column(name = "displayName")
@@ -22,7 +23,7 @@ public class Suggestion extends BaseModel {
 	@Column(name = "value")
 	private String value;
 
-	@Column(name = "position")
+	@Column(name = Col.POSITION)
 	private int position;
 
 	@Column(name = "cursor")
