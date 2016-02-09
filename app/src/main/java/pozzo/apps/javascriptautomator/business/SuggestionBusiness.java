@@ -12,6 +12,8 @@ import pozzo.apps.javascriptautomator.model.Suggestion;
  *
  * @author Luiz Gustavo Pozzo
  * @since 06/02/16
+ *
+ * TODO add position aware
  */
 public class SuggestionBusiness {
 

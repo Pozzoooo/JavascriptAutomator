@@ -30,11 +30,16 @@ public class SuggestionsCreator {
 	public List<Suggestion> create() {
 		ArrayList<Suggestion> suggestions = new ArrayList<>();
 
-		//TODO increase our suggestion database
-		Suggestion suggestion = new Suggestion("submit",
-				"javascript:document.getElementById(\"\").submit()", 36);
-
-		suggestions.add(suggestion);
+		suggestions.add(new Suggestion("getById",
+				"javascript:document.getElementById(\"\")", 36));
+		suggestions.add(new Suggestion("getByName",
+				"javascript:document.getElementsByName(\"\")[0]", 39));
+		suggestions.add(new Suggestion("getByClass",
+				"javascript:document.getElementsByClassName(\"\")[0]", 44));
+		suggestions.add(new Suggestion("submit", ".submit();", 10));
+		suggestions.add(new Suggestion("click", ".click();", 9));
+		suggestions.add(new Suggestion("setText", ".value=\"\";", 8));
+		suggestions.add(new Suggestion("getTitle", "javascript:document.title", 25));
 
 		return suggestions;
 	}
