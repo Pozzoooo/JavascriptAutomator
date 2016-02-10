@@ -1,6 +1,8 @@
 package pozzo.apps.javascriptautomator.core;
 
 import android.app.Application;
+import android.content.Context;
+import android.os.AsyncTask;
 
 import com.activeandroid.ActiveAndroid;
 
@@ -24,17 +26,35 @@ public class App extends Application {
 	public void onCreate() {
 		super.onCreate();
 		ActiveAndroid.initialize(this);
+		initializationChecker(this);
+	}
 
-		/* Trigger this on db creation would be probably a better approach, but I dont think I can
-		 		do it with AA.
-		   And if you know a better way to avoid this IO, pleas tell me.
+	/**
+	 * Check if our system are good to go!
+	 * With all basic data to our user!
+	 *
+	 * As our load list also runs on an AsyncTask, it will be loaded only after it finish this
+	 * 	initialization.
+	 */
+	private void initializationChecker(final Context context) {
+		new AsyncTask<Void, Void, Void>() {
+			@Override
+			protected Void doInBackground(Void... params) {
+				checkSampleEntry(context);
+				checkSuggestions();
+				return null;
+			}
+		}.execute();
+	}
 
-		   TODO Maybe in background?
-		*/
+	/**
+	 * Check the need to insert a sample entry.
+	 * @param context so we can save.
+	 */
+	private void checkSampleEntry(Context context) {
 		SampleEntryCreator sampleEntryCreator = new SampleEntryCreator();
 		if(sampleEntryCreator.shouldCreateSample())
-			sampleEntryCreator.create(this).save();
-		checkSuggestions();
+			sampleEntryCreator.create(context).save();
 	}
 
 	/**
