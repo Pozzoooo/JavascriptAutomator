@@ -51,6 +51,16 @@ public class EntryBusiness {
 	}
 
 	/**
+	 * Deletes given entry from our storage.
+	 * @param entry to be deleted.
+	 */
+	public void delete(Entry entry) {
+		if(entry == null)
+			return;
+		entry.delete();
+	}
+
+	/**
 	 * Undo deletion for an already deleted entry.
 	 * May dup if already saved.
 	 */

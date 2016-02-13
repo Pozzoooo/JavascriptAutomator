@@ -157,7 +157,7 @@ public class EntryActivity extends AppCompatActivity {
 	 */
 	private void deleteEntry(Entry entry) {
 		if(entry != null) {
-			entry.delete();
+			entryBusiness.delete(entry);
 			Intent data = new Intent();
 			data.putExtra(RES_DELETED_ENTRY, entry);
 			setResult(RESULT_OK, data);
