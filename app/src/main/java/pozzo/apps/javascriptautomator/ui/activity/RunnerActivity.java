@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import com.splunk.mint.Mint;
+
 import pozzo.apps.javascriptautomator.core.JavascriptRunner;
 import pozzo.apps.javascriptautomator.R;
 import pozzo.apps.javascriptautomator.business.EntryBusiness;
@@ -41,9 +43,9 @@ public class RunnerActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_runner);
 
 		entryBusiness = new EntryBusiness();
-		handleParam(savedInstanceState);
+		if(!handleParam(savedInstanceState))
+			Mint.logException(new Exception("No entry param on runner"));
 		setupWebview();
-		//TODO add a log for empty param
 		runEntry(entry);
 	}
 
