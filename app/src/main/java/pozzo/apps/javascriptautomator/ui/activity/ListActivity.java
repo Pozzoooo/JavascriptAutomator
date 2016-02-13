@@ -131,10 +131,27 @@ public class ListActivity extends AppCompatActivity implements SearchView.OnQuer
 				.setAction(R.string.undo, new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						deletedEntry.save();
-						loadList();
+						undelete(deletedEntry);
 					}
 				}).show();
+	}
+
+	/**
+	 * Undelete the entry.
+	 */
+	private void undelete(final Entry deletedEntry) {
+		new AsyncTask<Void, Void, Void>() {
+			@Override
+			protected Void doInBackground(Void... params) {
+				entryBusiness.undelete(deletedEntry);
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void aVoid) {
+				loadList();
+			}
+		}.execute();
 	}
 
 	/**

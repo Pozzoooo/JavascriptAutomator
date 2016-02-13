@@ -49,4 +49,17 @@ public class EntryBusiness {
 		commands = commands.replaceAll("[\n]{2,}", "\n");
 		return commands.split("\n");
 	}
+
+	/**
+	 * Undo deletion for an already deleted entry.
+	 * May dup if already saved.
+	 */
+	public void undelete(Entry deletedEntry) {
+		if(deletedEntry == null)
+			return;
+
+		//I set id null so AA will insert and not try to update
+		deletedEntry.setId(null);
+		deletedEntry.save();
+	}
 }
