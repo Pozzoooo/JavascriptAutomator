@@ -19,6 +19,10 @@ import pozzo.apps.javascriptautomator.model.Suggestion;
  *
  * @author Luiz Gustavo Pozzo
  * @since 21/01/16.
+ *
+ * TODO Create widget
+ * TODO Undo not woking
+ * TODO Undo text is in wrong color
  */
 public class App extends Application {
 	@Override

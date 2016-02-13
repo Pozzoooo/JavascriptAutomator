@@ -39,6 +39,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvSuggestions"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/button_heigth" />
+            android:layout_height="@dimen/button_heigth"
+            android:layout_marginBottom="@dimen/margin_big"/>
     </LinearLayout>
 </ScrollView>
