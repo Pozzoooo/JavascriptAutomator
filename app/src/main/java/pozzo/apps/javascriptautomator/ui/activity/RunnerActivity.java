@@ -1,15 +1,17 @@
 package pozzo.apps.javascriptautomator.ui.activity;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.splunk.mint.Mint;
 
-import pozzo.apps.javascriptautomator.core.JavascriptRunner;
 import pozzo.apps.javascriptautomator.R;
 import pozzo.apps.javascriptautomator.business.EntryBusiness;
+import pozzo.apps.javascriptautomator.core.JavascriptRunner;
 import pozzo.apps.javascriptautomator.model.Entry;
 
 /**
@@ -47,6 +49,11 @@ public class RunnerActivity extends AppCompatActivity {
 			Mint.logException(new Exception("No entry param on runner"));
 		setupWebview();
 		runEntry(entry);
+
+		ActionBar actionBar = getSupportActionBar();
+		if(actionBar != null) {
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
 	}
 
 	/**
@@ -80,5 +87,16 @@ public class RunnerActivity extends AppCompatActivity {
 		long entryId = savedInstanceState.getLong(PARAM_ENTRY_ID);
 		entry = new EntryBusiness().get(entryId);
 		return entry != null;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				onBackPressed();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
 	}
 }
