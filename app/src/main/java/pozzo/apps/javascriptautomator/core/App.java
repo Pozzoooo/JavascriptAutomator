@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.activeandroid.ActiveAndroid;
+import com.splunk.mint.Mint;
 
 import java.util.List;
 
@@ -18,8 +19,6 @@ import pozzo.apps.javascriptautomator.model.Suggestion;
  *
  * @author Luiz Gustavo Pozzo
  * @since 21/01/16.
- *
- * TODO add mint
  */
 public class App extends Application {
 	@Override
@@ -27,6 +26,7 @@ public class App extends Application {
 		super.onCreate();
 		ActiveAndroid.initialize(this);
 		initializationChecker(this);
+		Mint.initAndStartSession(this, "057af9a9");
 	}
 
 	/**
