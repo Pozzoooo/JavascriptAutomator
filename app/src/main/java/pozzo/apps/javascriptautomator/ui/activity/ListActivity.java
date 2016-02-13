@@ -2,6 +2,7 @@ package pozzo.apps.javascriptautomator.ui.activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -127,13 +129,22 @@ public class ListActivity extends AppCompatActivity implements SearchView.OnQuer
 		if(deletedEntry == null)
 			return;
 
-		Snackbar.make(vgMain, R.string.deleted, Snackbar.LENGTH_LONG)
+		Snackbar snackbar = Snackbar.make(vgMain, R.string.deleted, Snackbar.LENGTH_LONG)
 				.setAction(R.string.undo, new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						undelete(deletedEntry);
 					}
-				}).show();
+				});
+		TextView text = (TextView)
+				snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
+		int color;
+		if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1)
+			color = getColor(R.color.text_primaryInverse);
+		else
+			color = getResources().getColor(R.color.text_primaryInverse);
+		text.setTextColor(color);
+		snackbar.show();
 	}
 
 	/**
