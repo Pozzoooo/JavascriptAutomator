@@ -10,32 +10,45 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin">
 
-        <EditText
-            android:id="@+id/eName"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:inputType="text"
-            android:hint="@string/name"/>
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/eName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="text"
+                android:hint="@string/name"/>
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/eAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:inputType="text"
-            android:hint="@string/address"/>
 
-        <EditText
-            android:id="@+id/eCommands"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minLines="4"
-            android:singleLine="false"
-            android:inputType="textMultiLine"
-            android:gravity="top"
-            android:hint="@string/commandsInfo"/>
-        
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/eAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="text"
+                android:hint="@string/address"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/eCommands"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="4"
+                android:singleLine="false"
+                android:inputType="textMultiLine"
+                android:gravity="top"
+                android:hint="@string/commandsInfo"/>
+        </android.support.design.widget.TextInputLayout>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvSuggestions"
             android:layout_width="match_parent"
