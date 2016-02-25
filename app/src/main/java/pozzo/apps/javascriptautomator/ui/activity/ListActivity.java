@@ -138,11 +138,7 @@ public class ListActivity extends AppCompatActivity implements SearchView.OnQuer
 				});
 		TextView text = (TextView)
 				snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
-		int color;
-		if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1)
-			color = getColor(R.color.text_primaryInverse);
-		else
-			color = getResources().getColor(R.color.text_primaryInverse);
+		int color = getResources().getColor(R.color.text_primaryInverse);
 		text.setTextColor(color);
 		snackbar.show();
 	}
