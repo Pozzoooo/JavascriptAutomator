@@ -21,6 +21,7 @@ import pozzo.apps.javascriptautomator.model.Suggestion;
  * @since 21/01/16.
  *
  * TODO Create widget
+ * TODO Create dynamic permission request
  */
 public class App extends Application {
 	@Override
